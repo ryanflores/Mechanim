@@ -130,7 +130,7 @@ public class QT_CombineMeshes : EditorWindow
 			if(thisGO.GetComponent(typeof(Renderer)))
 			{
 				Component tempcomp = thisGO.GetComponent(typeof(Renderer));
-				tempmats = tempcomp.renderer.sharedMaterials;
+				tempmats = tempcomp.GetComponent<Renderer>().sharedMaterials;
 				
 			}
 			else
@@ -139,7 +139,7 @@ public class QT_CombineMeshes : EditorWindow
 				List<Material> tm = new List<Material>();
 				foreach(Component c in tempcomp)
 				{
-					Material[] tm2 = c.renderer.sharedMaterials;
+					Material[] tm2 = c.GetComponent<Renderer>().sharedMaterials;
 					foreach(Material m in tm2)
 						tm.Add(m);
 				}
@@ -169,7 +169,7 @@ public class QT_CombineMeshes : EditorWindow
 			if(thisGO.GetComponent(typeof(Renderer)))
 			{
 				Component tempcomp = thisGO.GetComponent(typeof(Renderer));
-				tempmats = tempcomp.renderer.sharedMaterials;
+				tempmats = tempcomp.GetComponent<Renderer>().sharedMaterials;
 				
 			}
 			else
@@ -178,7 +178,7 @@ public class QT_CombineMeshes : EditorWindow
 				List<Material> tm = new List<Material>();
 				foreach(Component c in tempcomp)
 				{
-					Material[] tm2 = c.renderer.sharedMaterials;
+					Material[] tm2 = c.GetComponent<Renderer>().sharedMaterials;
 					foreach(Material m in tm2)
 						tm.Add(m);
 				}
@@ -262,7 +262,7 @@ public class QT_CombineMeshes : EditorWindow
 		for (int i=0;i<filters.Length;i++) 
 		{
 			MeshFilter filter = (MeshFilter)filters[i];
-			Renderer curRenderer  = filters[i].renderer;
+			Renderer curRenderer  = filters[i].GetComponent<Renderer>();
 			MeshCombineUtility.MeshInstance instance = new MeshCombineUtility.MeshInstance ();
 			instance.mesh = filter.sharedMesh;
 			if (curRenderer != null && curRenderer.enabled && instance.mesh != null)
@@ -304,12 +304,12 @@ public class QT_CombineMeshes : EditorWindow
 				go.transform.localPosition = Vector3.zero;		
 				go.transform.position = Vector3.zero;
 				go.AddComponent(typeof(MeshFilter));
-				go.AddComponent("MeshRenderer");
-				go.renderer.material = (Material)de.Key;
+				go.AddComponent<MeshRenderer>();
+				go.GetComponent<Renderer>().material = (Material)de.Key;
 				MeshFilter filter = (MeshFilter)go.GetComponent(typeof(MeshFilter));				
                 filter.sharedMesh = MeshCombineUtility.Combine(instances, false);
-               	filter.renderer.receiveShadows = receiveShadows;
-				filter.renderer.castShadows = castShadows;
+               	filter.GetComponent<Renderer>().receiveShadows = receiveShadows;
+				filter.GetComponent<Renderer>().castShadows = castShadows;
 				go.isStatic = isStatic;
 				if(isLightmapped)
 					Unwrapping.GenerateSecondaryUVSet(filter.sharedMesh);
