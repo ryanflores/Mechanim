@@ -14,16 +14,16 @@ public class QT_DistanceDropout : MonoBehaviour {
 		if(CustomCamera) //if the user put a specific camera in the slot, use that for measurement.
 		{
 			if(Vector3.Distance(CustomCamera.transform.position,this.transform.position) >= DistanceFromCamera)
-				this.gameObject.renderer.enabled=false;
+				this.gameObject.GetComponent<Renderer>().enabled=false;
 			else
-				this.gameObject.renderer.enabled=true;
+				this.gameObject.GetComponent<Renderer>().enabled=true;
 		}
 		else //otherwise, use the main camera. Useful if there are several main cameras in the scene and they switch.
 		{
 			if(Vector3.Distance(Camera.main.transform.position,this.transform.position) >= DistanceFromCamera)
-				this.gameObject.renderer.enabled=false;
+				this.gameObject.GetComponent<Renderer>().enabled=false;
 			else
-				this.gameObject.renderer.enabled=true;
+				this.gameObject.GetComponent<Renderer>().enabled=true;
 		}
 		
 	}

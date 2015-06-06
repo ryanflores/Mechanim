@@ -24,7 +24,7 @@ public class QT_SkyBox : MonoBehaviour {
 		{
 		SkyCamera.transform.rotation = MainCam.transform.rotation;
 			
-		SkyCamera.camera.fieldOfView = MainCam.camera.fieldOfView;
+		SkyCamera.GetComponent<Camera>().fieldOfView = MainCam.GetComponent<Camera>().fieldOfView;
 			if(animated)			
 				SkyBox.transform.RotateAround(axis,(rate*0.005f)*Time.deltaTime);
 			
